@@ -1,15 +1,48 @@
-//your variable declarations here
+SpaceShip leapfrog = new SpaceShip();
 public void setup() 
 {
-  //your code here
+  size(1200,700);
 }
 public void draw() 
 {
-  //your code here
+ background(0);
+ leapfrog.show();
+ leapfrog.move();
 }
-class SpaceShip //extends Floater  
+class SpaceShip extends Floater  
 {   
-    //your code here
+  public SpaceShip()
+  {
+      corners = 6;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -10;
+      yCorners[0] = -8;
+      xCorners[1] = 3;
+      yCorners[1] = -8;
+      xCorners[2] = 16;
+      yCorners[2] = 0;
+      xCorners[3] = 3;
+      yCorners[3] = 8;
+      xCorners[4] = -10;
+      yCorners[4] = 8;
+      xCorners[5] = -4;
+      yCorners[5] = 0;
+      myColor = color(0,0,255);
+      myCenterX = 600;
+      myCenterY = 350;
+
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;};   
+  public void setDirectionX(double x){myDirectionX = x;};   
+  public double getDirectionX(){return (double)myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;};   
+  public double getDirectionY(){return (double)myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;};   
+  public double getPointDirection(){return myPointDirection;} 
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -87,4 +120,24 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
+public void keyPressed()
+{
+  if (key == 'w')
+  {
+    leapfrog.accelerate(1);
+  }
+  if (key == 's')
+  {
+    leapfrog.accelerate(-1);
+  }
+  if ( key == 'a')
+  {
+    leapfrog.rotate(-4);
+  }
+  if ( key == 'd')
+  {
+    leapfrog.rotate(4);
+  }
+}
+
 
