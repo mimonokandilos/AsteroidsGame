@@ -1,11 +1,18 @@
 SpaceShip leapfrog = new SpaceShip();
+Star[] Stars = new Star[200]
 public void setup() 
 {
   size(1200,700);
+  for(int i = 0; i < Stars.length; i++){
+    Stars[i] = new Star();
+  }
 }
 public void draw() 
 {
  background(0);
+ for(int i = 0; i < Stars.length; i++){
+    Star[i].show();
+  }
  leapfrog.show();
  leapfrog.move();
 }
@@ -137,6 +144,20 @@ public void keyPressed()
   if ( key == 'd')
   {
     leapfrog.rotate(4);
+  }
+  if( key == 'o')
+  {
+    leapfrog.setDirectionX(0);
+    leapfrog.setDirectionY(0);
+    leapfrog.setX((int)(Math.random()* 1200));
+    leapfrog.setY((int)(Math.random()* 700));
+    leapfrog.setPointDirection((int)(Math.random()* 360));
+
+  }
+  class Star
+  {
+    Stars.setX((int)Math.random()*1200);
+    Stars.setY((int)Math.random()*700);
   }
 }
 
