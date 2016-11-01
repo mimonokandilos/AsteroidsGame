@@ -1,4 +1,5 @@
 SpaceShip leapfrog = new SpaceShip();
+Asteroid delta = new Asteroid();
 Star[] gru;
 public void setup() 
 {
@@ -13,6 +14,8 @@ public void draw()
  background(0);
  leapfrog.show();
  leapfrog.move();
+ delta.show();
+ delta.move();
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
@@ -53,6 +56,48 @@ class SpaceShip extends Floater
   public void setPointDirection(int degrees){myPointDirection = degrees;};   
   public double getPointDirection(){return myPointDirection;} 
 }
+ class Asteroid extends Floater
+{
+    private int rSpeed;
+  public Asteroid()
+  {
+      corners = 8;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -5;
+      yCorners[0] = 1;
+      xCorners[1] = -3;
+      yCorners[1] = 2;
+      xCorners[2] = 0;
+      yCorners[2] = 4;
+      xCorners[3] = 1;
+      yCorners[3] = 2;
+      xCorners[4] = 3;
+      yCorners[4] = 1;
+      xCorners[5] = 2;
+      yCorners[5] = -1;
+      xCorners[6] = 0;
+      yCorners[6] = -2;
+      xCorners[7] = -2;
+      yCorners[7] = -1;
+      myColor = color(255,0,0);
+      myCenterX = (int)(Math.random()*1200);
+      myCenterY = (int)(Math.random()*700);
+      myPointDirection = (int)(Math.random()*360);
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;};   
+  public void setDirectionX(double x){myDirectionX = x;};   
+  public double getDirectionX(){return (double)myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;};   
+  public double getDirectionY(){return (double)myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;};   
+  public double getPointDirection(){return myPointDirection;} 
+}
+  
+
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
@@ -167,10 +212,9 @@ public void keyPressed()
     }
     public void draw()
     {
-      fill(255);
+      fill(255,255,0);
       ellipse(starX, starY, 1,1);
     }
   }
-
 
 
