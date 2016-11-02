@@ -8,14 +8,19 @@ public void setup()
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
   }
+  for(int i = 0; i < delta.length; i++){
+    delta[i] = new Asteroid();
+  }
 }
 public void draw() 
 {
  background(0);
  leapfrog.show();
  leapfrog.move();
- delta.show();
- delta.move();
+
+  for(int i = 0; i < delta.length; i++){
+    delta[i].draw();
+  }
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
@@ -59,7 +64,7 @@ class SpaceShip extends Floater
  class Asteroid extends Floater
 {
     private int rSpeed;
-  public Asteroid()
+    public Asteroid()
   {
       corners = 8;
       xCorners = new int[corners];
@@ -80,7 +85,7 @@ class SpaceShip extends Floater
       yCorners[6] = -2;
       xCorners[7] = -2;
       yCorners[7] = -1;
-      myColor = color(255,0,0);
+      myColor = color(0, 255, 0);
       myCenterX = (int)(Math.random()*1200);
       myCenterY = (int)(Math.random()*700);
       myPointDirection = (int)(Math.random()*360);
@@ -209,10 +214,11 @@ public void keyPressed()
     {
       starX = (int)(Math.random()*1200);
       starY = (int)(Math.random()*700);
+      //myColor = color(0,255,0);
     }
     public void draw()
     {
-      fill(255,255,0);
+      stroke(255);
       ellipse(starX, starY, 1,1);
     }
   }
