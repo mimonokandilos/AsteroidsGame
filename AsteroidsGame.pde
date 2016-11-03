@@ -1,5 +1,5 @@
 SpaceShip leapfrog = new SpaceShip();
-Asteroid delta = new Asteroid();
+Asteroid[] delta;
 Star[] gru;
 public void setup() 
 {
@@ -8,6 +8,7 @@ public void setup()
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
   }
+  delta = new Asteroid[30];
   for(int i = 0; i < delta.length; i++){
     delta[i] = new Asteroid();
   }
@@ -17,9 +18,9 @@ public void draw()
  background(0);
  leapfrog.show();
  leapfrog.move();
-
   for(int i = 0; i < delta.length; i++){
-    delta[i].draw();
+    delta[i].show();
+    delta[i].move();
   }
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
@@ -63,6 +64,7 @@ class SpaceShip extends Floater
 }
  class Asteroid extends Floater
 {
+    
     private int rSpeed;
     public Asteroid()
   {
@@ -85,10 +87,27 @@ class SpaceShip extends Floater
       yCorners[6] = -2;
       xCorners[7] = -2;
       yCorners[7] = -1;
+      for(int i = 0; i < yCorners.length; i++)
+      {
+        yCorners[i] = yCorners[i]*2;
+      }
+      for(int i = 0; i < xCorners.length; i++)
+      {
+        xCorners[i] = xCorners[i]*2;
+      }
       myColor = color(0, 255, 0);
       myCenterX = (int)(Math.random()*1200);
       myCenterY = (int)(Math.random()*700);
       myPointDirection = (int)(Math.random()*360);
+      rSpeed = (int)(Math.random()*2 + 1);
+      myDirectionX += (int)(Math.random()*6)-3;
+      myDirectionY += (int)(Math.random()*6)-3;
+      if( myDirectionX == 0){
+        myDirectionX += 1;
+      }
+      if( myDirectionY == 0){
+      myDirectionY += 1;
+      }
   }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
@@ -100,8 +119,11 @@ class SpaceShip extends Floater
   public double getDirectionY(){return (double)myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;};   
   public double getPointDirection(){return myPointDirection;} 
+  public void move(){
+  rotate(rSpeed);
+  super.move();
+  }
 }
-  
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
