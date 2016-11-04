@@ -3,7 +3,7 @@ Asteroid[] delta;
 Star[] gru;
 public void setup() 
 {
-  size(1200,700);
+  size(1000,650);
   gru = new Star[400];
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
@@ -47,7 +47,7 @@ class SpaceShip extends Floater
       xCorners[5] = -4;
       yCorners[5] = 0;
       myColor = color(0,0,255);
-      myCenterX = 600;
+      myCenterX = 500;
       myCenterY = 350;
 
   }
