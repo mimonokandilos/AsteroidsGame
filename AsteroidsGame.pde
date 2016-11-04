@@ -3,7 +3,7 @@ Asteroid[] delta;
 Star[] gru;
 public void setup() 
 {
-  size(1000,650);
+  size(1200,650);
   gru = new Star[400];
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
