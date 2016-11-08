@@ -1,16 +1,17 @@
 SpaceShip leapfrog = new SpaceShip();
-Asteroid[] delta;
 Star[] gru;
+// ArrayList <Asteroid> theList;
+// theList = new ArrayList <Thingy>();
+ArrayList <Asteroid> someRocks = new ArrayList <Asteroid>();
 public void setup() 
 {
-  size(1200,650);
+  size(1000,650);
   gru = new Star[400];
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
   }
-  delta = new Asteroid[30];
-  for(int i = 0; i < delta.length; i++){
-    delta[i] = new Asteroid();
+  for(int i = 0; i < 30; i++){
+    someRocks.add(new Asteroid());
   }
 }
 public void draw() 
@@ -18,14 +19,17 @@ public void draw()
  background(0);
  leapfrog.show();
  leapfrog.move();
-  for(int i = 0; i < delta.length; i++){
-    delta[i].show();
-    delta[i].move();
+  for(int i = 0; i < someRocks.size(); i++){
+    someRocks.get(i).show();
+    someRocks.get(i).move();
+  if(dist(leapfrog.getX(), leapfrog.getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
+{
+    someRocks.remove(i);
+}
   }
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
-
 }
 class SpaceShip extends Floater  
 {   
