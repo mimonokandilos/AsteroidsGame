@@ -1,7 +1,6 @@
 SpaceShip leapfrog = new SpaceShip();
 Star[] gru;
-// ArrayList <Asteroid> theList;
-// theList = new ArrayList <Thingy>();
+ArrayList <Bullet> bullets = new ArrayList <Bullet>();
 ArrayList <Asteroid> someRocks = new ArrayList <Asteroid>();
 public void setup() 
 {
@@ -10,15 +9,22 @@ public void setup()
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
   }
-  for(int i = 0; i < 30; i++){
+  for(int i = 0; i < 1; i++){
     someRocks.add(new Asteroid());
   }
+  for(int i = 0; i < 100; i++)
+    bullets.add(new Bullet());
 }
 public void draw() 
 {
  background(0);
  leapfrog.show();
  leapfrog.move();
+ for(int i = 0; i < bullets.size(); i++)
+ {
+    bullets.get(i).show();
+    bullets.get(i).show();
+ }
   for(int i = 0; i < someRocks.size(); i++){
     someRocks.get(i).show();
     someRocks.get(i).move();
@@ -30,7 +36,16 @@ public void draw()
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
+
+  if(someRocks.size() == 0)
+  {
+    background(0);
+    textAlign(CENTER);
+    textSize(30);
+    text("YOUR SHIP HAS CRASHED \n YOU HAVE DIED \n BETTER LUCK NEXT TIME", 500, 275);
+  }
 }
+
 class SpaceShip extends Floater  
 {   
   public SpaceShip()
@@ -129,6 +144,22 @@ class SpaceShip extends Floater
   }
 }
 
+class Bullet extends Floater
+{
+  public Bullet(){
+    ellipse()
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;};   
+  public void setDirectionX(double x){myDirectionX = x;};   
+  public double getDirectionX(){return (double)myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;};   
+  public double getDirectionY(){return (double)myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;};   
+  public double getPointDirection(){return myPointDirection;} 
+}
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
@@ -230,6 +261,10 @@ public void keyPressed()
     leapfrog.setX((int)(Math.random()* 1200));
     leapfrog.setY((int)(Math.random()* 700));
     leapfrog.setPointDirection((int)(Math.random()* 360));
+
+  }
+  if( key == 'p')
+  {
 
   }
 }
