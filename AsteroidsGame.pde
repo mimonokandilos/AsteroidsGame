@@ -9,7 +9,7 @@ public void setup()
   for(int i = 0; i < gru.length; i++){
     gru[i] = new Star();
   }
-  for(int i = 0; i < 1; i++){
+  for(int i = 0; i < 20; i++){
     someRocks.add(new Asteroid());
   }
   for(int i = 0; i < 100; i++)
@@ -20,10 +20,10 @@ public void draw()
  background(0);
  leapfrog.show();
  leapfrog.move();
- for(int i = 0; i < bullets.size(); i++)
+ for(int b = 0; b < bullets.size(); b++)
  {
-    bullets.get(i).show();
-    bullets.get(i).show();
+    bullets.get(b).show();
+    bullets.get(b).show();
  }
   for(int i = 0; i < someRocks.size(); i++){
     someRocks.get(i).show();
@@ -146,8 +146,43 @@ class SpaceShip extends Floater
 
 class Bullet extends Floater
 {
-  public Bullet(){
-    ellipse()
+  public Bullet()
+  {
+      corners = 7;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -2;
+      yCorners[0] = 2;
+      xCorners[1] = 0;
+      yCorners[1] = 2;
+      xCorners[2] = 2;
+      yCorners[2] = 2;
+      xCorners[3] = 2;
+      yCorners[3] = -2;
+      xCorners[4] = 0;
+      yCorners[4] = -2;
+      xCorners[5] = -2;
+      yCorners[5] = -2;
+      xCorners[6] = -2;
+      yCorners[6] = 2;
+    myColor = color(0,0,255);
+    
+    myPointDirection = leapfrog.getPointDirection();
+    double dRadians = myPointDirection*(Math.PI/180);
+
+    myCenterX = leapfrog.getX() + 10;
+    myCenterY = leapfrog.getY();
+
+    myDirectionX = 5 * Math.cos(dRadians) + leapfrog.getDirectionX();
+    myDirectionY = 5 * Math.sin(dRadians) + leapfrog.getDirectionY();
+
+  }
+  public void move()
+  {
+    myCenterX += 10;
+    myCenterY += 10;
+
+    
   }
   public void setX(int x){myCenterX = x;}
   public int getX(){return (int)myCenterX;}   
@@ -265,7 +300,7 @@ public void keyPressed()
   }
   if( key == 'p')
   {
-
+    bullets.add(new Bullet());
   }
 }
    class Star
