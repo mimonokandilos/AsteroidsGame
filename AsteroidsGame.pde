@@ -24,7 +24,7 @@ public void draw()
  {
     bullets.get(b).show();
     bullets.get(b).move();
-    if(dist(someRocks.getX(), someRocks.getY(), bullets.get(b).getX(), bullets.get(b).getY()) < 20){
+    if(dist(bullets.get(b).getX(), bullets.get(b).getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20){
       bullets.remove(b);
     }
  }
@@ -35,7 +35,7 @@ public void draw()
 // {
 //     someRocks.remove(i);
 // }
-//   }
+   }
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
