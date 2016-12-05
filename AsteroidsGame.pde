@@ -23,16 +23,19 @@ public void draw()
  for(int b = 0; b < bullets.size(); b++)
  {
     bullets.get(b).show();
-    bullets.get(b).show();
+    bullets.get(b).move();
+    if(dist(someRocks.getX(), someRocks.getY(), bullets.get(b).getX(), bullets.get(b).getY()) < 20){
+      bullets.remove(b);
+    }
  }
   for(int i = 0; i < someRocks.size(); i++){
     someRocks.get(i).show();
     someRocks.get(i).move();
-  if(dist(leapfrog.getX(), leapfrog.getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
-{
-    someRocks.remove(i);
-}
-  }
+//   if(dist(leapfrog.getX(), leapfrog.getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
+// {
+//     someRocks.remove(i);
+// }
+//   }
  for(int i = 0; i < gru.length; i++){
     gru[i].draw();
   }
@@ -179,8 +182,8 @@ class Bullet extends Floater
   }
   public void move()
   {
-    myCenterX += 10;
-    myCenterY += 10;
+    myCenterX += myDirectionX;
+    myCenterY += myDirectionY;
 
     
   }
