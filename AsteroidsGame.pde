@@ -2,52 +2,80 @@ SpaceShip leapfrog = new SpaceShip();
 Star[] gru;
 ArrayList <Bullet> bullets = new ArrayList <Bullet>();
 ArrayList <Asteroid> someRocks = new ArrayList <Asteroid>();
+boolean gameOver = false;
 public void setup() 
 {
   size(1000,650);
   gru = new Star[400];
-  for(int i = 0; i < gru.length; i++){
+  for(int i = 0; i < gru.length; i++)
+  {
     gru[i] = new Star();
   }
   for(int i = 0; i < 20; i++){
     someRocks.add(new Asteroid());
   }
-  for(int i = 0; i < 100; i++)
+  for(int i = 0; i < 1; i++)
+  {
     bullets.add(new Bullet());
+  }
 }
 public void draw() 
 {
- background(0);
- leapfrog.show();
- leapfrog.move();
- for(int b = 0; b < bullets.size(); b++)
- {
-    bullets.get(b).show();
-    bullets.get(b).move();
-    if(dist(bullets.get(b).getX(), bullets.get(b).getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20){
-      bullets.remove(b);
-    }
- }
-  for(int i = 0; i < someRocks.size(); i++){
-    someRocks.get(i).show();
-    someRocks.get(i).move();
-//   if(dist(leapfrog.getX(), leapfrog.getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
-// {
-//     someRocks.remove(i);
-// }
-   }
- for(int i = 0; i < gru.length; i++){
-    gru[i].draw();
-  }
-
   if(someRocks.size() == 0)
   {
     background(0);
     textAlign(CENTER);
     textSize(30);
-    text("YOUR SHIP HAS CRASHED \n YOU HAVE DIED \n BETTER LUCK NEXT TIME", 500, 275);
+    text("YOU HAVE WON \n BEATEN THE ASTEROIDS \n YOU HAD GOOD LUCK", 500, 275);
+
+  }
+  else if(gameOver == true)
+  {
+    background(0);
+    textAlign(CENTER);
+    textSize(30);
+    text("YOU HAVE LOST \n BEATEN BY THE ASTEROIDS \n BETTER LUCK NEXT TIME", 500, 275);
+  
+  }
+  else
+  {
+    background(0);
+    leapfrog.show();
+    leapfrog.move();
+    for(int i = 0; i < gru.length; i++)
+    {
+      gru[i].draw();
+    }
+    for(int b = 0; b < bullets.size(); b++)
+    {
+      bullets.get(b).show();
+      bullets.get(b).move();
+    }
+    for(int i = 0; i < someRocks.size(); i++)
+    {
+      someRocks.get(i).show();
+      someRocks.get(i).move();
+    }
+    for(int i = 0; i < someRocks.size(); i++)
+    {
+      for(int b = 0; b < bullets.size(); b++)
+      {
+       if(dist(bullets.get(b).getX(), bullets.get(b).getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
+       {
+        someRocks.remove(i);
+        bullets.remove(b);
+        break;
+       }
+       else if(dist(leapfrog.getX(), leapfrog.getY(), someRocks.get(i).getX(), someRocks.get(i).getY()) < 20)
+       {
+        someRocks.remove(i);
+        gameOver = true;
+       }
+      }
+    }
   }
 }
+
 
 class SpaceShip extends Floater  
 {   
@@ -111,11 +139,11 @@ class SpaceShip extends Floater
       yCorners[7] = -1;
       for(int i = 0; i < yCorners.length; i++)
       {
-        yCorners[i] = yCorners[i]*2;
+        yCorners[i] = yCorners[i]*4;
       }
       for(int i = 0; i < xCorners.length; i++)
       {
-        xCorners[i] = xCorners[i]*2;
+        xCorners[i] = xCorners[i]*4;
       }
       myColor = color(0, 255, 0);
       myCenterX = (int)(Math.random()*1200);
